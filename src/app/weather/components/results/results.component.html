@@ -1,0 +1,61 @@
+<!-- <table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">City</th>
+      <th scope="col">6 AM</th>
+      <th scope="col">12 PM</th>
+      <th scope="col">6 PM</th>
+      <th scope="col">12 AM</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let weather of weatherList; let i = index">
+      <td scope="row">{{ weather.city.name }}</td>
+      <td scope="row">{{ weather.list[2].main.temp_min }} &deg;</td>
+      <td scope="row">{{ weather.list[5].main.temp_min }} &deg;</td>
+      <td scope="row">{{ weather.list[8].main.temp_min }} &deg;</td>
+      <td scope="row">{{ weather.list[12].main.temp_min }} &deg;</td>
+    </tr>
+  </tbody>
+</table> -->
+<div class="table">
+<mat-form-field>
+  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+</mat-form-field>
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+  <!-- City Column -->
+  <ng-container matColumnDef="City">
+    <th mat-header-cell *matHeaderCellDef> City </th>
+    <td mat-cell *matCellDef="let element"> {{element.city.name}} </td>
+  </ng-container>
+
+  <!-- 6 AM Column -->
+  <ng-container matColumnDef="w1">
+    <th mat-header-cell *matHeaderCellDef> 6 AM </th>
+    <td mat-cell *matCellDef="let element"> {{element.list[2].main.temp_min}} </td>
+  </ng-container>
+
+  <!-- 12 PM Column -->
+  <ng-container matColumnDef="w2">
+    <th mat-header-cell *matHeaderCellDef> 12 PM </th>
+    <td mat-cell *matCellDef="let element"> {{element.list[5].main.temp_min}} </td>
+  </ng-container>
+
+  <!-- 6 PM Column -->
+  <ng-container matColumnDef="w3">
+    <th mat-header-cell *matHeaderCellDef> 6 PM </th>
+    <td mat-cell *matCellDef="let element"> {{element.list[8].main.temp_min}} </td>
+  </ng-container>
+
+  <!-- 6 PM Column -->
+  <ng-container matColumnDef="w4">
+    <th mat-header-cell *matHeaderCellDef> 12 AM </th>
+    <td mat-cell *matCellDef="let element"> {{element.list[12].main.temp_min}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+</div>
