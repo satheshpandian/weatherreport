@@ -12,7 +12,7 @@ export class WeatherService {
     q: '',
     cnt: '24',
     units: 'metric',
-    APPID: '010721642521f31b0fbc8c3831d45951',
+    APPID: '614f423ec961e8f3db75b0ed0cd5adbd',
   };
 
   constructor(private http: HttpClient) {}
