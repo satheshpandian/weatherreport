@@ -16,7 +16,7 @@ import { WeatherData } from '../models/weather';
     <app-results [weatherList]="weatherList"></app-results>
   `,
 })
-export class WeatherContainer implements OnDestroy {
+export class WeatherContainer  {
   public sub: Subscription;
   weather$: Observable<WeatherData[]>;
   weatherList: WeatherData[];
@@ -24,17 +24,10 @@ export class WeatherContainer implements OnDestroy {
   constructor(public service: WeatherService, private store: Store<State>) {
     this.weatherList = [];
     this.weather$ = store.select(selectAllWeathers);
-  }
-  citySearch(cityName) {
-    this.store.dispatch(WeatherActions.SearchAction({ city: cityName }));
-    this.getWeatherForecast();
-  }
-  getWeatherForecast() {
-    // OR Use async in Template to automatically unsubscribe
-    this.sub = this.weather$.subscribe((res) => (this.weatherList = res),
+    this.weather$.subscribe((res) => (this.weatherList = res),
       () => () => throwError);
   }
-  ngOnDestroy(): void {
-    this.sub.unsubscribe();
+  citySearch(cityName: string) {
+    this.store.dispatch(WeatherActions.SearchAction({ city: cityName }));
   }
 }
